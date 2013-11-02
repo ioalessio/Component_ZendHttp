@@ -159,7 +159,9 @@ class Client implements Stdlib\DispatchableInterface
         foreach ($options as $k => $v) {
             $this->config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
         }
-
+        //set Adapter
+        if(isset($this->config['adapter'])) {
+            $this->setAdapter($this->config['adapter']);
         // Pass configuration options to the adapter if it exists
         if ($this->adapter instanceof Client\Adapter\AdapterInterface) {
             $this->adapter->setOptions($options);
